@@ -15,8 +15,12 @@ export default function PortfolioPage() {
   const [selectedCategory, setSelectedCategory] = useState('All');
   
   // Extract unique categories from projects
-  const categories = ['All', ...Array.from(new Set(projects.map(p => p.attributes.service?.data?.attributes?.name).filter(Boolean)))];
-
+  const categories: string[] = ['All', ...Array.from(new Set(
+    projects
+      .map(p => p.attributes.service?.data?.attributes?.name)
+      .filter((name): name is string => Boolean(name))
+  ))];
+  
   useEffect(() => {
     async function fetchProjects() {
       try {

@@ -1,6 +1,6 @@
 // Strapi API configuration
-const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL || 'https://necessary-oasis-1e2f1787c1.strapiapp.com/admin';
-const STRAPI_TOKEN = process.env.NEXT_PUBLIC_STRAPI_TOKEN;
+const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL || 'https://impressive-cow-1777db2c6c.strapiapp.com/admin';
+const STRAPI_TOKEN = process.env.NEXT_PUBLIC_STRAPI_TOKEN || '42909c5c1f0b422b2a232736675e7f2a6b73b2cc93ca0fc39769604b747ddc31';
 
 // Strapi API client
 class StrapiAPI {
@@ -14,9 +14,9 @@ class StrapiAPI {
 
   private async request(endpoint: string, options: RequestInit = {}) {
     const url = `${this.baseUrl}/api${endpoint}`;
-    const headers: HeadersInit = {
+    const headers: Record<string, string> = {
       'Content-Type': 'application/json',
-      ...options.headers,
+      ...(options.headers as Record<string, string> || {}),
     };
 
     if (this.token) {
